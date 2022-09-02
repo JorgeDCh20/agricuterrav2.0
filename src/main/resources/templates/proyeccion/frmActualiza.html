@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="master/master :: head">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<header th:replace="master/master :: header"></header>
+	<div class="container">
+	
+	<hr style="background-color: #fdfdfd" />
+		<div
+			style="font-family: 'Roboto Condensed', 'sans-serif'; font-size: 150%">Modificar proyección</div>
+		<hr style="background-color: #228B22" />
+		<hr style="background-color: #fdfdfd" />
+	
+		<div>
+			<form th:action="@{/pproyecciones/update}" method="post"
+				th:object="${pr}">
+
+				<div class="col-sm-12">
+					<label class="form-label">Id: </label> <input type="text" required
+						th:field="*{idProyeccion}" class="form-control"></input>
+				</div>
+				
+				<div class="col-sm-12">
+					<label class="form-label">Id analisis  </label> <input type="text" required
+						th:field="*{analisis.idAnalisis}" class="form-control"></input>
+				</div>
+
+
+
+				
+				<div class="col-sm-3">
+					<label class="form-label">Fecha de Proyeccion: </label> <input required min="2022-06-28"
+						type="date" th:field="*{dateFuturaProyeccion}" class="form-control"></input>
+				</div>
+
+
+				
+					<div class="col-sm-12">
+
+					<label class="form-label">Detalles de la proyección:</label> <select
+						name="selectType" class="form-control" th:field="*{textoDetallesProyeccion}">
+						<option value="Pésima cosecha" selected>Pésima cosecha</option>
+						<option value="Mala cosecha">Mala cosecha</option>
+						<option value="Regular cosecha">Regular cosecha</option>
+						<option value="Buena cosecha">Buena cosecha</option>
+						<option value="Excelente cosecha">Excelente cosecha</option>
+					</select>
+				</div>
+
+
+				<div class="col-sm-12">
+					<input type="submit" value="Modificar" class="btn btn-dark"></input>
+				</div>
+
+			</form>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="master/master :: head">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<header th:replace="master/master :: header"></header>
+	<div class="container">
+	
+	<hr style="background-color: #fdfdfd" />
+		<div
+			style="font-family: 'Roboto Condensed', 'sans-serif'; font-size: 150%">Registrar
+			un factor</div>
+		<hr style="background-color: #228B22" />
+		<hr style="background-color: #fdfdfd" />
+	
+		<div>
+			<form th:action="@{/ffactores/save}" method="post" th:object="${f}">
+
+				<div class="col-sm-12">
+					<label class="form-label">Tipo de factor: </label> <select
+						name="selectTipoFactor" class="form-control" required
+						th:field="*{tipofactor.idTipoFactor}">
+
+						<option th:each="tf:${listaTipoFactores}" th:value="${tf.idTipoFactor}" 
+							th:text="${tf.NombreTipoFactor}" 
+							th:selected="(${tf.idTipoFactor}==*{tipofactor.idTipoFactor})"></option>
+					</select>
+				</div>
+<!-- Desde aqui se ingresan datos :V -->
+				<div class="col-sm-12">
+					<label class="form-label">Precipitación: </label> <input
+						type="number"  th:field="*{qPrecipitacion}"
+						min="0" max="100" maxlength="3" class="form-control"></input>
+						 <div class="help-text"><i>Ejemplo: 75%</i></div><br>
+				</div>
+				
+				<div class="col-sm-12">
+					<label class="form-label">Humedad: </label> <input
+						type="number"  th:field="*{qHumedad}"
+						min="0" max="100" maxlength="3" class="form-control"></input>
+						 <div class="help-text"><i>Ejemplo: 75%</i></div><br>
+				</div>
+
+				<div class="col-sm-12">
+					<label class="form-label">Temperatura: </label> <input
+						type="number"  th:field="*{qTemperatura}"
+					min="0" max="45" maxlength="2" class="form-control"></input>
+						  <div class="help-text"><i>Ejemplo: 25°</i></div><br>
+				</div>
+
+				<div class="col-sm-12">
+					<label class="form-label">Fosfato: </label> <input
+						type="number"  th:field="*{qFosfato}"
+					min="0" max="30" maxlength="2" class="form-control"></input>
+						  <div class="help-text"><i>De 0 mg a 30 mg </i></div><br>
+				</div>
+
+				<div class="col-sm-12">
+					<label class="form-label">Nitrato: </label> <input
+						type="number" th:field="*{qNitrato}"
+					min="0" max="30" maxlength="2" class="form-control"></input>
+						   <div class="help-text"><i>De 0 mg a 30 mg </i></div><br>
+				</div>
+
+				<div class="col-sm-12">
+					<label class="form-label">Sulfato: </label> <input type="number"
+						th:field="*{qSulfato}" 
+					min="0" max="150" maxlength="3" class="form-control"></input>
+						  <div class="help-text"><i>De 0 mg a 150 mg </i></div><br>
+				</div>
+
+				<div class="col-sm-12">
+					<label class="form-label">PH: </label> <input
+						type="number"  th:field="*{qPH}"
+					min="0" max="14" maxlength="2" class="form-control"></input>
+					   <div class="help-text"><i>De 0 a 14 </i></div><br>
+				</div>
+
+				<div class="col-sm-12">
+					<label class="form-label ">Descripción de Factor: </label> <input
+						type="text" required th:field="*{nombreFactor}" class="form-control"></input>
+						<div class="help-text"><i>formato: Datos obtenidos del terreno-Lugar-Área</i></div><br>
+						
+				</div>
+							
+				<div class="col-sm-12">
+					<label class="form-label">Usuario: </label> <select
+						name="selectUsuario" class="form-control" required
+						th:field="*{usuario.idUsuario}">
+
+						<option th:each="u:${listaUsuarios}" th:value="${u.idUsuario}" 
+							th:text="${u.fullNameUsuario}" 
+							th:selected="(${u.idUsuario}==*{usuario.idUsuario})"></option>
+					</select>
+				</div>
+				<br>
+				<div class="col-sm-12">
+					<input type="submit" value="Registrar" class="btn btn-dark"></input>
+				</div>
+
+			</form>
+		</div>
+	</div>
+</body>
+</html>

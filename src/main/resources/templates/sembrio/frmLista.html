@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="master/master :: head">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<header th:replace="master/master :: header"></header>
+	<div class="container">
+
+		<hr style="background-color: #fdfdfd" />
+		<div
+			style="font-family: 'Roboto Condensed', 'sans-serif'; font-size: 150%">Lista
+			de Sembrios</div>
+		<hr style="background-color: #228B22" />
+		<hr style="background-color: #fdfdfd" />
+
+		<div>
+			<div class="table-responsive">
+				<table class="table table-white">
+					<thead>
+						<tr>
+							<th>Id</th>
+							<th>Sembrio</th>
+							<th>Temperatura Ideal (C)</th>
+							<th>pH Ideal</th>
+							<th>Humedad Ideal (%)</th>
+							<th>Operación</th>
+							<th>Operación</th>
+						</tr>
+					</thead>
+
+					<tbody id="sembrios-list">
+						<tr th:each="sem:${listaSembrios}">
+							<td th:text="${sem.idSembrio}"></td>
+							<td th:text="${sem.nombreSembrio}"></td>
+							<td th:text="${sem.temperaturaIdeal}"></td>
+							<td th:text="${sem.phIdeal}"></td>
+							<td th:text="${sem.humedadIdeal}"></td>
+
+							<td><a style="background-color: red; color: white"
+								class="btn" th:href="@{/psembrios/delete?id=}+${sem.idSembrio}"
+								sec:authorize="hasAnyAuthority('ROLE_ADMINISTRATOR')">
+									Eliminar </a></td>
+
+							<td><a style="background-color: green; color: white"
+								class="btn" th:href="@{'/psembrios/goupdate/'+${sem.idSembrio}}" sec:authorize="hasAnyAuthority('ROLE_ADMINISTRATOR')">
+									Modificar </a></td>
+
+						</tr>
+					</tbody>
+
+				</table>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

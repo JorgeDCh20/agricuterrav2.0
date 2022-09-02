@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="master/master::head">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<header th:replace="master/master::header"></header>
+
+	<div class="container">
+
+		<hr style="background-color: #fdfdfd" />
+		<div
+			style="font-family: 'Roboto Condensed', 'sans-serif'; font-size: 150%">Registro
+			de Recomendaciones con Usuarios</div>
+		<hr style="background-color: #fa251b" />
+		<hr style="background-color: #fdfdfd" />
+
+		<div>
+			<form th:action="@{/precomendacionXusuario/save}" method="post"
+				th:object="${ru}">
+
+
+				<div class="col-sm-3">
+					<label class="form-label">Usuario:</label> <select
+						name="selectUsuario" class="form-control"
+						th:field="*{usuario.idUsuario}">
+						<option th:each="u:${listaUsuarios}" th:value="${u.idUsuario}"
+							th:text="${u.fullNameUsuario}"
+							th:select="(${u.idUsuario}==*{usuario.idUsuario})"></option>
+					</select>
+				</div>
+
+				<div class="col-sm-3">
+					<label class="form-label">Recomendación:</label> <select
+						name="selectRecomendacion" class="form-control"
+						th:field="*{recomendacion.idRecomendacion}">
+						<option th:each="r:${listaRecomendaciones}"
+							th:value="${r.idRecomendacion}"
+							th:text="${r.descripcionRecomendacion}"
+							th:select="(${r.idRecomendacion}==*{recomendacion.idRecomendacion})"></option>
+					</select>
+				</div>
+<br>
+				<div class="col-sm-12">
+					<input type="submit" value="Registrar" class="btn btn-dark"></input>
+				</div>
+
+			</form>
+		</div>
+	</div>
+
+</body>
+</html>

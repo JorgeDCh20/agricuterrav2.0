@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="master/master :: head">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<header th:replace="master/master :: header"></header>
+	<div class="container">
+	
+	<hr style="background-color: #fdfdfd" />
+		<div
+			style="font-family: 'Roboto Condensed', 'sans-serif'; font-size: 150%">Registrar un análisis</div>
+		<hr style="background-color: #228B22" />
+		<hr style="background-color: #fdfdfd" />
+		<div>
+			<form th:action="@{/panalisis/save}" method="post" th:object="${a}">
+				
+				
+				<div class="col-sm-12">
+					<label class="form-label" th:each="f:${fa}" th:value="${f.idFactor}"
+							th:text="'Usuario :  '+${f.usuario.fullNameUsuario}"> </label> 
+					
+				</div>
+						
+				<div class="col-sm-12">
+					<label class="form-label">Descripción de factor: </label> <select
+						name="selectFactor" class="form-control"
+						th:field="*{factor.idFactor}">
+						<option th:each="f:${fa}" th:value="${f.idFactor}"
+							th:text="${f.nombreFactor}"
+							th:selected="(${f.idFactor}==*{factor.idFactor})"></option>
+					</select>
+				</div>
+				
+				
+				<div class="col-sm-12">
+					<label class="form-label">Sembrío: </label> <select
+						name="selectSembrio" class="form-control"
+						 required th:field="*{sembrio.idSembrio}">
+						<option th:each="se:${listaSembrios}" th:value="${se.idSembrio}"
+							th:text="${se.nombreSembrio}"
+							th:selected="(${se.idSembrio}==*{sembrio.idSembrio})"></option>
+							
+					</select>
+				</div>
+				
+		
+								
+				<div class="col-sm-12">
+				
+				<label class="form-label">Descripción del análisis:</label>
+				<input type="text" required th:field="*{TextAnalisis}" class="form-control"></input>
+				
+				</div>
+				
+				<div class="col-sm-12">
+				
+				<input type="submit" value="Registrar" class="btn btn-dark"></input>
+				
+				</div>
+
+
+			</form>
+		</div>
+	</div>
+
+</body>
+</html>

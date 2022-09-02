@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head th:fragment="head">
+
+<meta charset="UTF-8">
+<title>Agricuterra</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+
+	<header th:fragment="header">
+
+
+		<nav class="navbar navbar-expand-lg navbar-dark bg-success">
+
+			<div class="container-fluid">
+
+				<a class="navbar-brand" href="#"><img alt=""
+					th:src="@{/assets/logo2.png}" height="80" width="80"> </a>
+
+				<button class="navbar-toggler" type="button"
+					data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+					aria-controls="navbarNavDropdown" aria-expanded="false"
+					aria-label="Toggle navigation">
+
+					<span class="navbar-toggler-icon"></span>
+
+				</button>
+
+				<div class="collapse navbar-collapse" id="navbarNavDropdown">
+					<ul class="navbar-nav">
+						<li class="nav-item"><a class="nav-link active"
+							th:href="@{/home}">Home</a></li>
+						<li class="nav-item dropdown"><a
+							class="nav-link dropdown-toggle" href="#"
+							id="navbarDropdownMenuLink" role="button"
+							data-bs-toggle="dropdown" aria-expanded="false"
+							style="color: #fdfdfd"
+							sec:authorize="hasAnyAuthority('ROLE_ADMINISTRATOR','ROLE_PRUEBA')">
+								Usuario</a>
+							<ul class="dropdown-menu"
+								aria-labelledby="navbarDropdownMenuLink">
+								<li><a class="dropdown-item" th:href="@{/pusuarios/list}">Listar</a></li>
+							</ul></li>
+						<li class="nav-item dropdown"><a
+							class="nav-link dropdown-toggle" href="#"
+							id="navbarDropdownMenuLink" role="button"
+							data-bs-toggle="dropdown" aria-expanded="false"
+							style="color: #fdfdfd"
+							sec:authorize="hasAnyAuthority('ROLE_ADMINISTRATOR','ROLE_ESPECIALISTA')">
+								Sembrio</a>
+							<ul class="dropdown-menu"
+								aria-labelledby="navbarDropdownMenuLink">
+								<li><a class="dropdown-item" th:href="@{/psembrios/new}"
+									sec:authorize="hasAnyAuthority('ROLE_ADMINISTRATOR')">Registrar</a></li>
+								<li><a class="dropdown-item" th:href="@{/psembrios/list}">Listar</a></li>
+							</ul></li>
+
+
+						<li class="nav-item dropdown"><a
+							class="nav-link dropdown-toggle" href="#"
+							id="navbarDropdownMenuLink" role="button"
+							data-bs-toggle="dropdown" aria-expanded="false"
+							style="color: #fdfdfd"
+							sec:authorize="hasAnyAuthority('ROLE_ADMINISTRATOR')"> Categoria</a>
+							<ul class="dropdown-menu"
+								aria-labelledby="navbarDropdownMenuLink">
+								<li><a class="dropdown-item" th:href="@{/ccategorias/new}">Registrar</a></li>
+								<li><a class="dropdown-item" th:href="@{/ccategorias/list}">Listar</a></li>
+							</ul></li>
+
+						<li class="nav-item dropdown"><a
+							class="nav-link dropdown-toggle" href="#"
+							id="navbarDropdownMenuLink" role="button"
+							data-bs-toggle="dropdown" aria-expanded="false"
+							style="color: #fdfdfd"
+							sec:authorize="hasAnyAuthority('ROLE_ADMINISTRATOR','ROLE_ESPECIALISTA')">
+								Tipo Recomendacion</a>
+							<ul class="dropdown-menu"
+								aria-labelledby="navbarDropdownMenuLink">
+								<li><a class="dropdown-item"
+									th:href="@{/ptiporecomendacion/new}"
+									sec:authorize="hasAnyAuthority('ROLE_ESPECIALISTA')">Registrar</a></li>
+								<li><a class="dropdown-item"
+									th:href="@{/ptiporecomendacion/list}">Listar</a></li>
+							</ul></li>
+						<li class="nav-item dropdown"><a
+							class="nav-link dropdown-toggle" href="#"
+							id="navbarDropdownMenuLink" role="button"
+							data-bs-toggle="dropdown" aria-expanded="false"
+							style="color: #fdfdfd"
+							sec:authorize="hasAnyAuthority('ROLE_ADMINISTRATOR','ROLE_ESPECIALISTA','ROLE_AGRICULTOR')">
+								Recomendacion</a>
+							<ul class="dropdown-menu"
+								aria-labelledby="navbarDropdownMenuLink">
+								<li><a class="dropdown-item"
+									th:href="@{/rrecomendacion/new}"
+									sec:authorize="hasAnyAuthority('ROLE_ESPECIALISTA')">Registrar</a></li>
+								<li><a class="dropdown-item"
+									th:href="@{/rrecomendacion/list}">Listar</a></li>
+							</ul></li>
+						<li class="nav-item dropdown"><a
+							class="nav-link dropdown-toggle" href="#"
+							id="navbarDropdownMenuLink" role="button"
+							data-bs-toggle="dropdown" aria-expanded="false"
+							style="color: #fdfdfd"
+							sec:authorize="hasAnyAuthority('ROLE_ADMINISTRATOR','ROLE_ESPECIALISTA','ROLE_AGRICULTOR')">
+								Asignar Recomen.</a>
+							<ul class="dropdown-menu"
+								aria-labelledby="navbarDropdownMenuLink">
+								<li><a class="dropdown-item"
+									th:href="@{/precomendacionXusuario/new}"
+									sec:authorize="hasAnyAuthority('ROLE_ESPECIALISTA')">Registrar</a></li>
+								<li><a class="dropdown-item"
+									th:href="@{/precomendacionXusuario/list}">Listar</a></li>
+							</ul></li>
+						<li class="nav-item dropdown"><a
+							class="nav-link dropdown-toggle" href="#"
+							id="navbarDropdownMenuLink" role="button"
+							data-bs-toggle="dropdown" aria-expanded="false"
+							style="color: #fdfdfd"
+							sec:authorize="hasAnyAuthority('ROLE_ADMINISTRATOR')"> Tipo Factor</a>
+							<ul class="dropdown-menu"
+								aria-labelledby="navbarDropdownMenuLink">
+								<li><a class="dropdown-item"
+									th:href="@{/ttipofactores/new}">Registrar</a></li>
+								<li><a class="dropdown-item"
+									th:href="@{/ttipofactores/list}">Listar</a></li>
+							</ul></li>
+
+						<li class="nav-item dropdown"><a
+							class="nav-link dropdown-toggle" href="#"
+							id="navbarDropdownMenuLink" role="button"
+							data-bs-toggle="dropdown" aria-expanded="false"
+							style="color: #fdfdfd"
+							sec:authorize="hasAnyAuthority('ROLE_ADMINISTRATOR','ROLE_ESPECIALISTA','ROLE_AGRICULTOR','ROLE_EMPRESARIO')">
+								Factor</a>
+							<ul class="dropdown-menu"
+								aria-labelledby="navbarDropdownMenuLink">
+								<li><a class="dropdown-item" th:href="@{/ffactores/new}"
+									sec:authorize="hasAnyAuthority('ROLE_AGRICULTOR','ROLE_EMPRESARIO')">Registrar</a></li>
+								<li><a class="dropdown-item" th:href="@{/ffactores/list}">Listar</a></li>
+							</ul></li>
+
+						<li class="nav-item dropdown"><a
+							class="nav-link dropdown-toggle" href="#"
+							id="navbarDropdownMenuLink" role="button"
+							data-bs-toggle="dropdown" aria-expanded="false"
+							style="color: #fdfdfd"
+							sec:authorize="hasAnyAuthority('ROLE_ADMINISTRATOR','ROLE_ESPECIALISTA','ROLE_AGRICULTOR','ROLE_EMPRESARIO')">
+								Analisis</a>
+							<ul class="dropdown-menu"
+								aria-labelledby="navbarDropdownMenuLink">
+								<li><a class="dropdown-item" th:href="@{/panalisis/list}">Listar</a></li>
+							</ul></li>
+
+						<li class="nav-item dropdown"><a
+							class="nav-link dropdown-toggle" href="#"
+							id="navbarDropdownMenuLink" role="button"
+							data-bs-toggle="dropdown" aria-expanded="false"
+							style="color: #fdfdfd"
+							sec:authorize="hasAnyAuthority('ROLE_ADMINISTRATOR','ROLE_ESPECIALISTA','ROLE_EMPRESARIO')">
+								Proyeccion</a>
+							<ul class="dropdown-menu"
+								aria-labelledby="navbarDropdownMenuLink">
+								<li><a class="dropdown-item"
+									th:href="@{/pproyecciones/list}">Listar</a></li>
+							</ul></li>
+						<li class="nav-item dropdown"><a
+							class="nav-link dropdown-toggle" href="#"
+							id="navbarDropdownMenuLink" role="button"
+							data-bs-toggle="dropdown" aria-expanded="false"
+							style="color: #fdfdfd"
+							sec:authorize="hasAnyAuthority('ROLE_ADMINISTRATOR','ROLE_ESPECIALISTA')">
+								Reporte</a>
+							<ul class="dropdown-menu"
+								aria-labelledby="navbarDropdownMenuLink">
+								<li><a class="dropdown-item"
+									th:href="@{/preportes/reporte1}">Reporte 1</a></li>
+								<li><a class="dropdown-item"
+									th:href="@{/preportes/reporte2}">Reporte 2</a></li>
+								<li><a class="dropdown-item"
+									th:href="@{/preportes/reporte3}">Reporte 3</a></li>
+								<li><a class="dropdown-item"
+									th:href="@{/preportes/reporte4}">Reporte 4</a></li>
+								<li><a class="dropdown-item"
+									th:href="@{/preportes/reporte5}">Reporte 5</a></li>
+							</ul></li>
+				</div>
+				<div class="dropdown" style="text-aling: left; width: 175px">
+					<form id="logoutForm" th:action="@{/logout}" method="post">
+
+						<a class="btn btn-secondary dropdown-toggle" href="#"
+							role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
+							aria-expanded="false"> <span sec:authentication="name"></span>
+						</a>
+
+						<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+							<li><a class="dropdown-item"
+								onclick="document.getElementById('logoutForm').submit();"
+								type="submit">Cerrar sesión</a></li>
+						</ul>
+					</form>
+				</div>
+				</ul>
+
+			</div>
+
+			</div>
+
+		</nav>
+	</header>
+	<div class="container py4"></div>
+	<footer th:fragment="footer" class="container">
+		<p>programación en web202201</p>
+	</footer>
+</body>
+</html>

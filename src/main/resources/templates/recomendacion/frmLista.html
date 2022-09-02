@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="master/master :: head">
+<meta charset="UTF-8">
+<title>Categoria</title>
+</head>
+<body>
+	<header th:replace="master/master :: header"></header>
+	<div class="container">
+
+		<hr style="background-color: #fdfdfd" />
+		<div
+			style="font-family: 'Roboto Condensed', 'sans-serif'; font-size: 150%">Lista
+			de Recomendaciones</div>
+		<hr style="background-color: #fa251b" />
+		<hr style="background-color: #fdfdfd" />
+
+		<div>
+			<div class="table-responsive">
+				<table class="table table-white">
+					<thead>
+						<tr>
+							<th>Id</th>
+							<th>Tipo de Recomendacion</th>
+							<th>Descripcion de Recomendacion</th>
+							<th>Operación</th>
+							<th>Operación</th>
+						</tr>
+					</thead>
+					<tbody id="recomendacion-list">
+						<tr th:each="rec:${listaRecomendaciones}">
+							<td th:text="${rec.idRecomendacion}"></td>
+							<td th:text="${rec.TipoRecomendacion.nameTipoRecomendacion}"></td>
+							<td th:text="${rec.descripcionRecomendacion}"></td>
+
+							<td><a style="background-color: red; color: white"
+								class="btn"
+								th:href="@{/rrecomendacion/delete?id=}+${rec.idRecomendacion}" sec:authorize="hasAnyAuthority('ROLE_ESPECIALISTA')">
+									Eliminar </a></td>
+
+							<td><a style="background-color: green; color: white"
+								class="btn"
+								th:href="@{'/rrecomendacion/goupdate/'+${rec.idRecomendacion}}" sec:authorize="hasAnyAuthority('ROLE_ESPECIALISTA')">
+									Modificar </a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

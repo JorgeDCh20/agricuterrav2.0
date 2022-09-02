@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="master/master :: head">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<header th:replace="master/master :: header"></header>
+	<div class="container">
+
+		<hr style="background-color: #fdfdfd" />
+		<div
+			style="font-family: 'Roboto Condensed', 'sans-serif'; font-size: 150%">Proyecciones actuales que presentan una pésima cosecha</div>
+		<hr style="background-color: #228B22" />
+		<hr style="background-color: #fdfdfd" />
+
+		<div>
+			<div class="table-responsive">
+				<table class="table table-white">
+					<thead>
+						<tr>
+							<th>Usuario</th>
+							<th>Sembrío</th>
+							<th>Detalle de proyección</th>
+							<th>Detalle de análisis</th>
+							<th>Detalle de factor</th>
+							<th>Fecha de proyección</th>
+						</tr>
+					</thead>
+					<tbody id="proyeccionxpesimacos-list">
+						<tr th:each="an:${listProyeccionXpesimaCos}">
+							<td th:text="${an[0]}"></td>
+							<td th:text="${an[1]}"></td>
+							<td th:text="${an[2]}"></td>
+							<td th:text="${an[3]}"></td>
+							<td th:text="${an[4]}"></td>
+							<td th:text="${an[5]}"></td>
+
+
+						</tr>
+					</tbody>
+
+				</table>
+
+			</div>
+		</div>
+
+		
+
+	</div>
+</body>
+
+</html>
