@@ -22,8 +22,8 @@
 
 						<th>Nombre del Usuario</th>
 						<th>Recomendación</th>
-						<th>Operación</th>
-						<th>Operación</th>
+						<th sec:authorize="hasAnyAuthority('ROLE_ESPECIALISTA')">Operación</th>
+						<th sec:authorize="hasAnyAuthority('ROLE_ESPECIALISTA')">Operación</th>
 
 					</tr>
 				</thead>

@@ -24,8 +24,9 @@
 							<th>Usuario</th>
 							<th>Sembrío</th>
 							<th>Descripción de análisis</th>
-							<th>Operación</th>
-							<th>Operación</th>
+							<th sec:authorize="hasAnyAuthority('ROLE_ESPECIALISTA')">Operación</th>
+							<th sec:authorize="hasAnyAuthority('ROLE_ESPECIALISTA')">Operación</th>
+							<th sec:authorize="hasAnyAuthority('ROLE_ESPECIALISTA')">Operación</th>
 						</tr>
 					</thead>
 					<tbody id="analisis-list">

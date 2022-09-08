@@ -23,8 +23,8 @@
 							<th>Id</th>
 							<th>Tipo de Recomendacion</th>
 							<th>Descripcion de Recomendacion</th>
-							<th>Operación</th>
-							<th>Operación</th>
+							<th sec:authorize="hasAnyAuthority('ROLE_ESPECIALISTA')">Operación</th>
+							<th sec:authorize="hasAnyAuthority('ROLE_ESPECIALISTA')">Operación</th>
 						</tr>
 					</thead>
 					<tbody id="recomendacion-list">

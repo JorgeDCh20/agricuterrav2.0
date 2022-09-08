@@ -19,8 +19,8 @@
 					<tr>
 						<th>Id</th>
 						<th>Nombre de Tipo de Recomendacion:</th>
-						<th></th>
-						<th></th>
+						<th sec:authorize="hasAnyAuthority('ROLE_ESPECIALISTA')">Operación</th>
+						<th sec:authorize="hasAnyAuthority('ROLE_ESPECIALISTA')">Operación</th>
 					</tr>
 				</thead>
 				<tbody id="tiporecomendacion-list">

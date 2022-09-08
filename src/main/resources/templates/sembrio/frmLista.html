@@ -26,8 +26,8 @@
 							<th>Temperatura Ideal (C)</th>
 							<th>pH Ideal</th>
 							<th>Humedad Ideal (%)</th>
-							<th>Operación</th>
-							<th>Operación</th>
+							<th sec:authorize="hasAnyAuthority('ROLE_AGRICULTOR')">Operación</th>
+							<th sec:authorize="hasAnyAuthority('ROLE_AGRICULTOR')">Operación</th>
 						</tr>
 					</thead>
 
@@ -41,11 +41,12 @@
 
 							<td><a style="background-color: red; color: white"
 								class="btn" th:href="@{/psembrios/delete?id=}+${sem.idSembrio}"
-								sec:authorize="hasAnyAuthority('ROLE_ADMINISTRATOR')">
+								sec:authorize="hasAnyAuthority('ROLE_AGRICULTOR')">
 									Eliminar </a></td>
 
 							<td><a style="background-color: green; color: white"
-								class="btn" th:href="@{'/psembrios/goupdate/'+${sem.idSembrio}}" sec:authorize="hasAnyAuthority('ROLE_ADMINISTRATOR')">
+								class="btn" th:href="@{'/psembrios/goupdate/'+${sem.idSembrio}}"
+								 sec:authorize="hasAnyAuthority('ROLE_AGRICULTOR')">
 									Modificar </a></td>
 
 						</tr>
