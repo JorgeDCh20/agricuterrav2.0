@@ -7,16 +7,16 @@
 <body>
 	<header th:replace="master/master :: header"></header>
 	<div class="container">
-	<hr style="background-color: #fdfdfd" />
+		<hr style="background-color: #fdfdfd" />
 		<div
 			style="font-family: 'Roboto Condensed', 'sans-serif'; font-size: 150%">Registrar
 			un sembrio</div>
 		<hr style="background-color: #228B22" />
 		<hr style="background-color: #fdfdfd" />
-	
+
 		<div>
 			<form th:action="@{/psembrios/save}" method="post" th:object="${s}">
-				
+
 				<div class="col-sm-3">
 
 					<label class="form-label">Nombre de sembrio:</label> <select
@@ -26,35 +26,38 @@
 						<option value="Cafe">Cafe</option>
 					</select>
 				</div>
-				
-						
+
+
 				<div class="col-sm-3">
-				
-				<label class="form-label">Temperatura Ideal (C):</label>
-				<input type="number" required max="25" min="18"  th:field="*{temperaturaIdeal}" class="form-control"></input>
-				
-				</div>
-				
-				<div class="col-sm-3">
-				
-				<label class="form-label">pH Ideal:</label>
-				<input type="number" required  max="14" min="0" th:field="*{phIdeal}" class="form-control"></input>
-				
-				</div>
-				
-				<div class="col-sm-3">
-				
-				<label class="form-label">Humedad Ideal (%):</label>
-				<input type="number" required  max="100" min="0" th:field="*{humedadIdeal}" class="form-control"></input>
-				
-				</div>
-				
-				<div class="col-sm-12">
-				
-				<input type="submit" value="Registrar" class="btn btn-dark"></input>
-				
+
+					<label class="form-label">Temperatura Ideal (C):</label> <input
+						type="number" required max="25" min="18"
+						th:field="*{temperaturaIdeal}" class="form-control"></input>
+
 				</div>
 
+				<div class="col-sm-3">
+
+					<label class="form-label">pH Ideal:</label> <input type="number"
+						required max="14" min="0" th:field="*{phIdeal}"
+						class="form-control"></input>
+
+				</div>
+
+				<div class="col-sm-3">
+
+					<label class="form-label">Humedad Ideal (%):</label> <input
+						type="number" required max="100" min="0"
+						th:field="*{humedadIdeal}" class="form-control"></input>
+
+				</div>
+
+				<div class="col-sm-12">
+
+					<input type="submit" value="Registrar" class="btn btn-dark"></input>
+
+				</div>
+				<p th:text="${mensaje}" class="form-text text-danger"></p>
 
 			</form>
 		</div>

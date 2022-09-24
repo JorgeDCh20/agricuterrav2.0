@@ -38,7 +38,7 @@ public class SembrioController {
 		} else {
 			sembrioService.insert(se);
 			model.addAttribute("mensaje", "Se registró correctamente");
-			return "redirect:/psembrios/list";
+			return "sembrio/frmRegistro";
 		}
 	}
 
