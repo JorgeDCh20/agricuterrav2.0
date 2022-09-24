@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import pe.edu.upc.agricuterra.entities.Usuario;
 import pe.edu.upc.agricuterra.serviceinterfaces.ICategoriaService;
@@ -36,13 +37,14 @@ public class UsuarioController {
 	}
 
 	@PostMapping("/save")
-	public String saveUsuario(@Valid Usuario u, BindingResult binRes, Model model) {
+	public String saveUsuario(@Valid Usuario u, BindingResult binRes, Model model, RedirectAttributes attribute) {
 		if (binRes.hasErrors()|| u.getCategoria().getIdCategoria()==1) {
 			model.addAttribute("mensaje", "ROL INADECUADO");
 			return "redirect:/pusuarios/new";
 		} else {
 			usuarioService.insert(u);
 			model.addAttribute("mensaje", "Se registró correctamente");
+			attribute.addFlashAttribute("success", "ta registrao");
 			return "redirect:/";
 		}
 	}
@@ -58,14 +60,17 @@ public class UsuarioController {
 	}
 
 	@RequestMapping("/delete")
-	public String deleteUsuario(Map<String, Object> model, @RequestParam(value = "id") Integer id) {
+	public String deleteUsuario(Map<String, Object> model, @RequestParam(value = "id") Integer id, RedirectAttributes attribute) {
 		try {
 			if (id != null && id > 0) {
 				usuarioService.delete(id);
 				model.put("listaUsuarios", usuarioService.list());
+				attribute.addFlashAttribute("warning", "borradosiono");
 			}
 		} catch (Exception e) {
 			model.put("ERROR", e.getMessage());
+			attribute.addFlashAttribute("error", "no c puede, tiene dependencias");
+			
 		}
 		return "usuario/frmLista";
 	}
