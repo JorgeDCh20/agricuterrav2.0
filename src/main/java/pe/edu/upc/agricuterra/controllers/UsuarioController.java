@@ -39,7 +39,7 @@ public class UsuarioController {
 	@PostMapping("/save")
 	public String saveUsuario(@Valid Usuario u, BindingResult binRes, Model model, RedirectAttributes attribute) {
 		if (binRes.hasErrors()|| u.getCategoria().getIdCategoria()==1) {
-			model.addAttribute("mensaje", "ROL INADECUADO");
+			model.addAttribute("error", "ROL INADECUADO");
 			return "redirect:/pusuarios/new";
 		} else {
 			usuarioService.insert(u);

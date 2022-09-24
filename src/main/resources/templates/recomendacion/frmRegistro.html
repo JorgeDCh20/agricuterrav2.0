@@ -24,7 +24,8 @@
 					<label class="form-label">Tipo de Recomendacion: </label> <select
 						name="selectRecomendacion" class="form-control"
 						th:field="*{TipoRecomendacion.idTipoRecomendacion}">
-						<option th:each="t:${ListaTipoRecomendacion}" th:value="${t.idTipoRecomendacion}"
+						<option th:each="t:${ListaTipoRecomendacion}"
+							th:value="${t.idTipoRecomendacion}"
 							th:text="${t.nameTipoRecomendacion}"
 							th:selected="(${t.idTipoRecomendacion}==*{TipoRecomendacion.idTipoRecomendacion})"></option>
 					</select>
@@ -40,8 +41,28 @@
 				<div class="col-sm-12">
 					<input type="submit" value="Registrar" class="btn btn-dark"></input>
 				</div>
-
 			</form>
+
+			<div class="alert alert-success alert-dismissable"
+				th:if="${success != null}">
+				<label th:text="${success}"></label>
+			</div>
+			<!-- Msjes :v - error  -->
+			<div class="alert alert-danger alert-dismissable"
+				th:if="${error != null}">
+				<label th:text="${error}"></label>
+			</div>
+			<!-- Msjes :v - warning  -->
+			<div class="alert alert-warning alert-dismissable"
+				th:if="${warning != null}">
+				<label th:text="${warning}"></label>
+			</div>
+			<!-- Msjes :v - info  -->
+			<div class="alert alert-info alert-dismissable"
+				th:if="${info != null}">
+				<label th:text="${info}"></label>
+			</div>
+
 		</div>
 	</div>
 </body>

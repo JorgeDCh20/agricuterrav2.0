@@ -38,9 +38,10 @@ public class RecomendacionController {
 	public String saveRecomendacion(@Valid Recomendacion re, BindingResult binRes, Model model) {
 		if (binRes.hasErrors()) {
 			return "recomendacion/frmRegistro";
+			
 		} else {
 			recomendacionService.insert(re);
-			model.addAttribute("mensaje", "Se registró correctamente");
+			model.addAttribute("success", "Se registró correctamente");
 			return "redirect:/rrecomendacion/new";
 		}
 	}
@@ -56,11 +57,12 @@ public class RecomendacionController {
 	}
 
 	@RequestMapping("/delete")
-	public String deleteRecomendacion(Map<String, Object> model, @RequestParam(value = "id") Integer id) {
+	public String deleteRecomendacion(Map<String, Object> model, @RequestParam(value = "id") Integer id, Model anuncio) {
 		try {
 			if (id != null && id > 0) {
 				recomendacionService.delete(id);
 				model.put("listaRecomendaciones", recomendacionService.list());
+				anuncio.addAttribute("warning", "Registro eliminado correctamente.");
 			}
 		} catch (Exception e) {
 			model.put("error", e.getMessage());
