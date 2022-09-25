@@ -47,8 +47,8 @@
 				<br>
 				<div class="col-sm-12" style="float: left; width: 45%">
 					<label class="form-label">Precipitación: </label> <input
-						type="number" th:field="*{qPrecipitacion}" min="0" max="100"
-						maxlength="3" class="form-control"></input>
+						type="number" th:field="*{qPrecipitacion}" min="0" max="100" required="required"
+						maxlength="3" class="form-control"></input> 
 					<div class="help-text">
 						<i>*Ejemplo: 75%</i>
 					</div>
@@ -56,7 +56,7 @@
 
 				<div class="col-sm-12" style="float: right; width: 45%">
 					<label class="form-label">Humedad: </label> <input type="number"
-						th:field="*{qHumedad}" min="0" max="100" maxlength="3"
+						th:field="*{qHumedad}" min="0" max="100" maxlength="3" required="required"
 						class="form-control"></input>
 					<div class="help-text">
 						<i>*Ejemplo: 75%</i>
@@ -67,7 +67,7 @@
 
 				<div class="col-sm-12" style="float: left; width: 45%">
 					<label class="form-label">Temperatura: </label> <input
-						type="number" th:field="*{qTemperatura}" min="0" max="45"
+						type="number" th:field="*{qTemperatura}" min="0" max="45" required="required"
 						maxlength="2" class="form-control"></input>
 					<div class="help-text">
 						<i>*Ejemplo: 25°</i>
@@ -77,7 +77,7 @@
 
 				<div class="col-sm-12" style="float: right; width: 45%">
 					<label class="form-label">Fosfato: </label> <input type="number"
-						th:field="*{qFosfato}" min="0" max="30" maxlength="2"
+						th:field="*{qFosfato}" min="0" max="30" maxlength="2" required="required"
 						class="form-control"></input>
 					<div class="help-text">
 						<i>*De 0 mg a 30 mg </i>
@@ -88,7 +88,7 @@
 
 				<div class="col-sm-12" style="float: left; width: 45%">
 					<label class="form-label">Nitrato: </label> <input type="number"
-						th:field="*{qNitrato}" min="0" max="30" maxlength="2"
+						th:field="*{qNitrato}" min="0" max="30" maxlength="2" required="required"
 						class="form-control"></input>
 					<div class="help-text">
 						<i>*De 0 mg a 30 mg </i>
@@ -98,7 +98,7 @@
 
 				<div class="col-sm-12" style="float: right; width: 45%">
 					<label class="form-label">Sulfato: </label> <input type="number"
-						th:field="*{qSulfato}" min="0" max="150" maxlength="3"
+						th:field="*{qSulfato}" min="0" max="150" maxlength="3" required="required"
 						class="form-control"></input>
 					<div class="help-text">
 						<i>*De 0 mg a 150 mg </i>
@@ -109,7 +109,7 @@
 
 				<div class="col-sm-12" style="float: left; width: 45%">
 					<label class="form-label">PH: </label> <input type="number"
-						th:field="*{qPH}" min="0" max="14" maxlength="2"
+						th:field="*{qPH}" min="0" max="14" maxlength="2" required="required"
 						class="form-control"></input>
 					<div class="help-text">
 						<i>*De 0 a 14 </i>
