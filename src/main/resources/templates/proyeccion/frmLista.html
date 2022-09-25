@@ -26,8 +26,8 @@
 							<th>Detalle analisis</th>
 							<th>Descripción factor</th>
 							<th>Fecha de proyección</th>
-							<th>Operacion</th>
-							<th>Operacion</th>
+							<th sec:authorize="hasAnyAuthority('ROLE_ESPECIALISTA')">Operacion</th>
+							<th sec:authorize="hasAnyAuthority('ROLE_ESPECIALISTA')">Operacion</th>
 						</tr>
 					</thead>
 					<tbody id="proyecciones-list">
