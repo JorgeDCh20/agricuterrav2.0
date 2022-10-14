@@ -32,7 +32,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 		// Para permitir nuestro js y css (en nuestra carpeta static)
 		.antMatchers("/*.js", "/*.css").permitAll()		
 		// Para que solo un usuario logueado con esos roles acceda a /home
-		.antMatchers("/home").access("hasRole('ROLE_ADMINISTRATOR') or hasRole('ROLE_AGRICULTOR')or hasRole('ROLE_ESPECIALISTA')or hasRole('ROLE_EMPRESARIO')or hasRole('ROLE_PRUEBA')")
+		.antMatchers("/home").access("hasRole('ROLE_ADMINISTRATOR') or hasRole('ROLE_AGRICULTOR')or hasRole('ROLE_ESPECIALISTA')or hasRole('ROLE_EMPRESARIO')or hasRole('urwur')")
 		.and().formLogin().successHandler(sucessHandler).loginPage("/").loginProcessingUrl("/")
 		// Si el login es exitoso, retorna a /home
 		.defaultSuccessUrl("/home").permitAll().and().logout().logoutSuccessUrl("/login").permitAll()

@@ -44,7 +44,7 @@ public class UsuarioController {
 		} else {
 			usuarioService.insert(u);
 			model.addAttribute("mensaje", "Se registró correctamente");
-			attribute.addFlashAttribute("success", "ta registrao");
+			attribute.addFlashAttribute("success", "Se registró correctamente");
 			return "redirect:/";
 		}
 	}
@@ -65,11 +65,11 @@ public class UsuarioController {
 			if (id != null && id > 0) {
 				usuarioService.delete(id);
 				model.put("listaUsuarios", usuarioService.list());
-				attribute.addFlashAttribute("warning", "borradosiono");
+				attribute.addFlashAttribute("warning", "Hecho");
 			}
 		} catch (Exception e) {
 			model.put("ERROR", e.getMessage());
-			attribute.addFlashAttribute("error", "no c puede, tiene dependencias");
+			attribute.addFlashAttribute("error", "No se puede eliminar, tiene dependencias");
 			
 		}
 		return "usuario/frmLista";
