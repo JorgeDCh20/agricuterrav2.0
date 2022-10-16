@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import pe.edu.upc.agricuterra.entities.Analisis;
 import pe.edu.upc.agricuterra.entities.Factor;
@@ -46,12 +47,13 @@ public class AnalisisController {
 	
 
 	@PostMapping("/save")
-	public String saveAnalisis(@Valid Analisis an, BindingResult binRes, Model model) {
+	public String saveAnalisis(@Valid Analisis an, BindingResult binRes, Model model, RedirectAttributes attribute) {
 		if (binRes.hasErrors()) {
 			return "analisis/frmRegistro";
 		} else {
 			analisisService.insert(an);
 			model.addAttribute("mensaje", "Se registró correctamente");
+			attribute.addFlashAttribute("success", "Se registró correctamente.");
 			return "redirect:/panalisis/list";
 		}
 	}
@@ -73,9 +75,11 @@ public class AnalisisController {
 			if (id != null && id > 0) {
 				analisisService.delete(id);
 				model.put("listaAnalisis", analisisService.list());
+				model.put("warning", "Registro eliminado correctamente.");
+
 			}
 		} catch (Exception e) {
-			model.put("error", e.getMessage());
+			model.put("error", "El registro tiene dependencias, no se puede eliminar.");
 		}
 		return "analisis/frmLista";
 	}
@@ -91,8 +95,9 @@ public class AnalisisController {
 	}
 
 	@PostMapping("/update")
-	public String updateAnalisis(Analisis a) {
+	public String updateAnalisis(Analisis a, RedirectAttributes attribute) {
 		analisisService.update(a);
+		attribute.addFlashAttribute("success", "Se modificó correctamente.");
 		return "redirect:/panalisis/list";
 	}
 

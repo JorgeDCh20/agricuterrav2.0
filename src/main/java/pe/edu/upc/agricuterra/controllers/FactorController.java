@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import pe.edu.upc.agricuterra.entities.Factor;
 import pe.edu.upc.agricuterra.serviceinterfaces.IFactorService;
@@ -43,12 +44,13 @@ public class FactorController {
 	}
 
 	@PostMapping("/save")
-	public String saveFactor(@Valid Factor objFact, BindingResult binRes, Model model) {
+	public String saveFactor(@Valid Factor objFact, BindingResult binRes, Model model, RedirectAttributes attribute) {
 
 		if (binRes.hasErrors()) {
 			return "/factor/frmRegistro";
 		} else {
 			fService.insert(objFact);
+			attribute.addFlashAttribute("success", "Se registró correctamente.");
 		}
 
 		return "redirect:/ffactores/new";
@@ -70,14 +72,16 @@ public class FactorController {
 	}
 
 	@RequestMapping("/delete")
-	public String deleteFactor(Map<String, Object> model, @RequestParam(value = "id") Integer id) {
+	public String deleteFactor(Map<String, Object> model, @RequestParam(value = "id") Integer id, RedirectAttributes attribute) {
 		try {
 			if (id != null && id > 0) {
 				fService.delete(id);
 				model.put("listaFactores", fService.list());
+				model.put("warning", "Registro eliminado correctamente.");
+
 			}
 		} catch (Exception e) {
-			model.put("error", e.getMessage());
+			model.put("error", "El registro tiene dependencias, no se puede eliminar.");
 		}
 		return "factor/frmLista";
 	}
@@ -93,8 +97,9 @@ public class FactorController {
 	}
 //posible problemas a futuro aqui :v
 	@PostMapping("/update")
-	public String updateFactor(Factor f) {
+	public String updateFactor(Factor f, RedirectAttributes attribute) {
 		fService.update(f);
+		attribute.addFlashAttribute("success", "Se modificó correctamente.");
 		return "redirect:/ffactores/list";
 
 	}

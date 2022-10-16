@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import pe.edu.upc.agricuterra.entities.Recomendacion;
 import pe.edu.upc.agricuterra.serviceinterfaces.IRecomendacionService;
@@ -35,13 +36,14 @@ public class RecomendacionController {
 	}
 
 	@PostMapping("/save")
-	public String saveRecomendacion(@Valid Recomendacion re, BindingResult binRes, Model model) {
+	public String saveRecomendacion(@Valid Recomendacion re, BindingResult binRes, Model model, RedirectAttributes attribute) {
 		if (binRes.hasErrors()) {
 			return "recomendacion/frmRegistro";
 			
 		} else {
 			recomendacionService.insert(re);
-			model.addAttribute("success", "Se registró correctamente");
+			model.addAttribute("success", "Se registró correctamente.");
+			attribute.addFlashAttribute("success", "Se registró correctamente.");
 			return "redirect:/rrecomendacion/new";
 		}
 	}
@@ -63,9 +65,11 @@ public class RecomendacionController {
 				recomendacionService.delete(id);
 				model.put("listaRecomendaciones", recomendacionService.list());
 				anuncio.addAttribute("warning", "Registro eliminado correctamente.");
+				model.put("warning", "Registro eliminado correctamente.");
 			}
 		} catch (Exception e) {
-			model.put("error", e.getMessage());
+			//model.put("error", e.getMessage());
+			model.put("error", "El registro tiene dependencias, no se puede eliminar.");
 		}
 		return "recomendacion/frmLista";
 	}
@@ -80,8 +84,9 @@ public class RecomendacionController {
 	}
 
 	@PostMapping("/update")
-	public String updateRecomendacion(Recomendacion r) {
+	public String updateRecomendacion(Recomendacion r, RedirectAttributes attribute) {
 		recomendacionService.update(r);
+		attribute.addFlashAttribute("success", "Se modificó correctamente.");
 		return "redirect:/rrecomendacion/list";
 	}
 

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import pe.edu.upc.agricuterra.entities.TipoRecomendacion;
 import pe.edu.upc.agricuterra.serviceinterfaces.ITipoRecomendacionService;
@@ -32,12 +33,13 @@ public class TipoRecomendacionController {
 	}
 
 	@PostMapping("/save")
-	public String saveTipoRecomendacion(@Valid TipoRecomendacion tr, BindingResult binRes, Model model) {
+	public String saveTipoRecomendacion(@Valid TipoRecomendacion tr, BindingResult binRes, Model model, RedirectAttributes attribute) {
 		if (binRes.hasErrors()) {
 			return "TipoRecomendacion/frmRegistro";
 		} else {
 			tipoService.insert(tr);
 			model.addAttribute("mensaje", "Se registró correctamente");
+			attribute.addFlashAttribute("success", "Se registró correctamente");
 			return "redirect:/ptiporecomendacion/list";
 		}
 	}
@@ -58,9 +60,11 @@ public class TipoRecomendacionController {
 			if (id != null && id > 0) {
 				tipoService.delete(id);
 				model.put("ListaTipoRecomendacion", tipoService.list());
+				model.put("warning", "Registro eliminado correctamente.");
 			}
 		} catch (Exception e) {
-			model.put("error", e.getMessage());
+			//model.put("error", e.getMessage());
+			model.put("error", "El registro tiene dependencias, no se puede eliminar.");
 		}
 		return "TipoRecomendacion/frmLista";
 	}
@@ -76,8 +80,9 @@ public class TipoRecomendacionController {
 	
 	//guardar los cambios
 	@PostMapping("/update")
-	public String updateTipoRecomendacion(TipoRecomendacion t) {
+	public String updateTipoRecomendacion(TipoRecomendacion t, RedirectAttributes attribute) {
 		tipoService.update(t);
+		attribute.addFlashAttribute("success", "Se modificó correctamente.");
 		return "redirect:/ptiporecomendacion/list";
 	}
 	

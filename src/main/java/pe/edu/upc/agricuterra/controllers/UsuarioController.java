@@ -44,8 +44,8 @@ public class UsuarioController {
 			return "redirect:/pusuarios/new";
 		} else {
 			usuarioService.insert(u);
-			model.addAttribute("mensaje", "Se registró correctamente");
-			attribute.addFlashAttribute("success", "Se registró correctamente");
+			model.addAttribute("mensaje", "Se registró correctamente.");
+			attribute.addFlashAttribute("success", "Se registró correctamente.");
 			return "redirect:/";
 		}
 	}
@@ -66,11 +66,11 @@ public class UsuarioController {
 			if (id != null && id > 0) {
 				usuarioService.delete(id);
 				model.put("listaUsuarios", usuarioService.list());
-				attribute.addFlashAttribute("warning", "Hecho");
+				model.put("warning", "Registro eliminado correctamente.");
 			}
 		} catch (Exception e) {
-			model.put("ERROR", e.getMessage());
-			attribute.addFlashAttribute("error", "No se puede eliminar, tiene dependencias");
+			//model.put("ERROR", e.getMessage());
+			model.put("error", "El registro tiene dependencias, no se puede eliminar");
 			
 		}
 		return "usuario/frmLista";
@@ -85,8 +85,9 @@ public class UsuarioController {
 	}
 
 	@PostMapping("/update")
-	public String updateUsuario(Usuario usuario) {
+	public String updateUsuario(Usuario usuario, RedirectAttributes attribute) {
 		usuarioService.update(usuario);
+		attribute.addFlashAttribute("success", "Se modificó correctamente.");
 		return "redirect:/pusuarios/list";
 	}
 }

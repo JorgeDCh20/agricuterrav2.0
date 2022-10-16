@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import pe.edu.upc.agricuterra.entities.RecoXUsuario;
 import pe.edu.upc.agricuterra.serviceinterfaces.IRecoXUsuarioService;
@@ -40,12 +41,13 @@ public class RecoXUsuarioController {
 	}
 	
 	@PostMapping("/save")
-	public String saveRecoXUsuario (@Valid RecoXUsuario objrecoxusuario, BindingResult binRes, Model model) {
+	public String saveRecoXUsuario (@Valid RecoXUsuario objrecoxusuario, BindingResult binRes, Model model, RedirectAttributes attribute) {
 		if (binRes.hasErrors()) {
 			return "/RecoXUsuario/frmRegistro";
 		} else {
 			recoxusuarioService.insert(objrecoxusuario);
 			model.addAttribute("mensaje", "Se registro correctamente");
+			attribute.addFlashAttribute("success", "Se registró correctamente.");
 			return "redirect:/precomendacionXusuario/new";
 		}
 	}
@@ -61,14 +63,16 @@ public class RecoXUsuarioController {
 	}
 	
 	@RequestMapping("/delete")
-	public String deleteRecoXUsuario(Map<String, Object> model, @RequestParam(value = "id") Integer id) {
+	public String deleteRecoXUsuario(Map<String, Object> model, @RequestParam(value = "id") Integer id, RedirectAttributes attribute) {
 		try {
 			if (id != null && id > 0) {
 				recoxusuarioService.delete(id);
 				model.put("listaRecoXUsuarios", recoxusuarioService.list());
+				model.put("warning", "Registro eliminado correctamente.");
+				
 			}
 		} catch (Exception e) {
-			model.put("error", e.getMessage());
+			model.put("error", "El registro tiene dependencias, no se puede eliminar.");
 		}
 		return "RecoXUsuario/frmLista";
 	}
@@ -83,8 +87,9 @@ public class RecoXUsuarioController {
 	}
 	
 	@PostMapping("/update")
-	public String updateRecoXUsuario(RecoXUsuario ru) {
+	public String updateRecoXUsuario(RecoXUsuario ru, RedirectAttributes attribute) {
 		recoxusuarioService.update(ru);
+		attribute.addFlashAttribute("success", "Se modificó correctamente.");
 		return "redirect:/precomendacionXusuario/list";
 	}
 	

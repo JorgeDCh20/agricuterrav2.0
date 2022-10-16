@@ -26,11 +26,11 @@
 						th:field="*{idAnalisis}" class="form-control"></input>
 
 				</div>
-
+<!-- este podria ser el problema -->
 				<div class="col-sm-12">
 					<label class="form-label" th:each="f:${listaFactores}"
 						th:value="${f.idFactor}"
-						th:text="'Usuario :  '+${f.usuario.fullNameUsuario}"> </label>
+						th:text="'Usuario :  '+${f.usuario.fullNameUsuario}" style="display: none;"> </label>
 
 				</div>
 

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import pe.edu.upc.agricuterra.entities.Categoria;
 import pe.edu.upc.agricuterra.serviceinterfaces.ICategoriaService;
@@ -31,12 +32,13 @@ public class CategoriaController {
 	}
 
 	@PostMapping("/save")
-	public String saveCategoria(@Valid Categoria ca, BindingResult binRes, Model model) {
+	public String saveCategoria(@Valid Categoria ca, BindingResult binRes, Model model, RedirectAttributes attribute) {
 		if (binRes.hasErrors()) {
 			return "categoria/frmRegistro";
 		} else {
 			categoriaService.insert(ca);
 			model.addAttribute("mensaje", "Se registró correctamente");
+			attribute.addFlashAttribute("success", "Se registró correctamente.");
 			return "redirect:/ccategorias/new";
 		}
 	}
@@ -57,9 +59,10 @@ public class CategoriaController {
 			if (id != null && id > 0) {
 				categoriaService.delete(id);
 				model.put("listaCategorias", categoriaService.list());
+				model.put("warning", "Registro eliminado correctamente.");
 			}
 		} catch (Exception e) {
-			model.put("error", e.getMessage());
+			model.put("error", "El registro tiene dependencias, no se puede eliminar.");
 		}
 		return "redirect:/ccategorias/list";
 	}
@@ -73,8 +76,9 @@ public class CategoriaController {
 	}
 
 	@PostMapping("/update")
-	public String updateCategoria(Categoria c) {
+	public String updateCategoria(Categoria c, RedirectAttributes attribute) {
 		categoriaService.update(c);
+		attribute.addFlashAttribute("success", "Se modificó correctamente.");
 		return "redirect:/ccategorias/list";
 	}
 

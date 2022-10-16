@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import pe.edu.upc.agricuterra.entities.Analisis;
 import pe.edu.upc.agricuterra.entities.Proyeccion;
@@ -42,12 +43,14 @@ public class ProyeccionController {
 	
 
 	@PostMapping("/save")
-	public String saveProyeccion(@Valid Proyeccion pr, BindingResult binRes, Model model) {
+	public String saveProyeccion(@Valid Proyeccion pr, BindingResult binRes, Model model, RedirectAttributes attribute) {
 		if (binRes.hasErrors()) {
 			return "proyeccion/frmRegistro";
 		} else {
 			proyeccionService.insert(pr);
 			model.addAttribute("mensaje", "Se registró correctamente");
+			attribute.addFlashAttribute("success", "Se registró correctamente.");
+
 			return "redirect:/pproyecciones/list";
 		}
 	}
@@ -63,14 +66,16 @@ public class ProyeccionController {
 	}
 
 	@RequestMapping("/delete")
-	public String deleteProyeccion(Map<String, Object> model, @RequestParam(value = "id") Integer id) {
+	public String deleteProyeccion(Map<String, Object> model, @RequestParam(value = "id") Integer id, RedirectAttributes attribute) {
 		try {
 			if (id != null && id > 0) {
 				proyeccionService.delete(id);
 				model.put("listaProyecciones", proyeccionService.list());
+				model.put("warning", "Registro eliminado correctamente.");
+				
 			}
 		} catch (Exception e) {
-			model.put("error", e.getMessage());
+			model.put("error", "El registro tiene dependencias, no se puede eliminar.");
 		}
 		return "proyeccion/frmLista";
 	}
@@ -85,8 +90,9 @@ public class ProyeccionController {
 
 	// este va a guardar los cambios y se actuliza en la base de datos
 	@PostMapping("/update")
-	public String updateProyeccion(Proyeccion p) {
+	public String updateProyeccion(Proyeccion p, RedirectAttributes attribute) {
 		proyeccionService.update(p);
+		attribute.addFlashAttribute("success", "Se modificó correctamente.");
 		return "redirect:/pproyecciones/list";
 	}
 
