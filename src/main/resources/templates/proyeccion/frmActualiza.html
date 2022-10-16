@@ -20,13 +20,15 @@
 				th:object="${pr}">
 
 				<div class="col-sm-12">
-					<label class="form-label">Id: </label> <input type="text" required
-						th:field="*{idProyeccion}" class="form-control" readonly onmousedown="return false;"></input>
+					<label class="form-label" style="display: none;">Id: </label> <input type="text" required
+						th:field="*{idProyeccion}" class="form-control" readonly onmousedown="return false;" 
+						style="display: none;"></input>
 				</div>
 				
 				<div class="col-sm-12">
-					<label class="form-label">Id analisis  </label> <input type="text" required
-						th:field="*{analisis.idAnalisis}" class="form-control" readonly onmousedown="return false;"></input>
+					<label class="form-label" style="display: none;">Id analisis  </label> <input type="text" required
+						th:field="*{analisis.idAnalisis}" class="form-control" readonly onmousedown="return false;"
+						style="display: none;"></input>
 				</div>
 
 

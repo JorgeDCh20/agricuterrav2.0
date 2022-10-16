@@ -18,13 +18,14 @@
 			<form th:action="@{/ptiporecomendacion/update}" method="post" th:object="${tru}">
 
 				<div class="col-sm-12">
-					<label class="form-label">ID:</label> <input type="text"
-						th:field="*{idTipoRecomendacion}" class="form-control"></input>
+					<label class="form-label"  style="display: none;">ID:</label> <input type="text"
+						th:field="*{idTipoRecomendacion}" class="form-control"  style="display: none;"></input>
 				</div>
 				
 				<div class="col-sm-12">
-					<label class="form-label">Nombre de Tipo de Recomendacion:</label> <input type="text"
-						th:field="*{nameTipoRecomendacion}" class="form-control"></input>
+					<label class="form-label">Nombre de Tipo de Recomendacion:</label> 
+					<input type="text"
+						th:field="*{nameTipoRecomendacion}" class="form-control" required="required"></input>
 				</div>
 
 <br>

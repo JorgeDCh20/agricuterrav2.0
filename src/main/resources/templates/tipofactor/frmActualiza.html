@@ -18,13 +18,13 @@
 			<form th:action="@{/ttipofactores/update}" method="post" th:object="${tif}">
 
 			<div class="col-sm-12">
-					<label class="form-label">Id: </label> <input type="text" required
-						th:field="*{idTipoFactor}" class="form-control"></input>
+					<label class="form-label" style="display: none;">Id: </label> <input type="text" required
+						th:field="*{idTipoFactor}" class="form-control" style="display: none;"></input>
 				</div>
 			
 				<div class="col-sm-12">
 					<label class="form-label">Nombre del tipo: </label> <input type="text"
-						required th:field="*{NombreTipoFactor}" class="form-control"></input>
+						required th:field="*{NombreTipoFactor}" class="form-control" required="required"></input>
 				</div>
 <br>
 				<div class="col-sm-12">
